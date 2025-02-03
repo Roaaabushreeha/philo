@@ -1,0 +1,100 @@
+/*eat_sleep_routine:
+*	When a philosopher is ready to eat, he will wait for his fork mutexes to
+*	be unlocked before locking them. Then the philosopher will eat for a certain
+*	amount of time. The time of the last meal is recorded at the beginning of
+*	the meal, not at the end, as per the subject's requirements.
+
+*/
+
+
+
+/* think_routine:
+*	Once a philosopher is done sleeping, he will think for a certain
+*	amount of time before starting to eat again.
+*	The time_to_think is calculated depending on how long it has been
+*	since the philosopher's last meal, the time_to_eat and the time_to_die
+*	to determine when the philosopher will be hungry again.
+*	This helps stagger philosopher's eating routines to avoid forks being
+*	needlessly monopolized by one philosopher to the detriment of others.
+
+
+
+
+
+/* lone_philo_routine:
+*	This routine is invoked when there is only a single philosopher.
+*	A single philosopher only has one fork, and so cannot eat. The
+*	philosopher will pick up that fork, wait as long as time_to_die and die.
+*	This is a separate routine to make sure that the thread does not get
+*	stuck waiting for the second fork in the eat routine.
+*/
+
+
+
+
+/* philosopher:
+*	The philosopher thread routine. The philosopher must eat, sleep
+*	and think. In order to avoid conflicts between philosopher threads,
+*	philosophers with an even id start by thinking, which delays their
+*	meal time by a small margin. This allows odd-id philosophers to
+*	grab their forks first, avoiding deadlocks.
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+//create philosopher and allocat a memory locations for forks and for forks *(done)*
+//make the threades for each of them *(done)*
+//i should write the routine of the philosopher//lock_forks//eating//sleeping//thinking
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+printf("Philosopher %d is thinking...\n", philo->id);
+
+    pthread_mutex_lock(philo->left_fork);
+    printf("Philosopher %d picked up the left fork.\n", philo->id);
+
+    pthread_mutex_lock(philo->right_fork);
+    printf("Philosopher %d picked up the right fork and is eating.\n", philo->id);
+
+    sleep(2);
+
+    pthread_mutex_unlock(philo->right_fork);
+    printf("Philosopher %d put down the right fork.\n", philo->id);
+
+    pthread_mutex_unlock(philo->left_fork);
+    printf("Philosopher %d put down the left fork and is thinking again.\n", philo->id);
