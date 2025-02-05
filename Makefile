@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread -g
 SRCS_DIR = src
 
-SLSRCS = philo.c init.c utils.c threads.c routine.c
+SLSRCS = philo.c init.c utils.c threads.c routine.c valid.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SLSRCS))
 OBJS = $(SRCS:.c=.o)

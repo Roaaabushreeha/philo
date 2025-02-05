@@ -83,18 +83,12 @@
 
 
 
-printf("Philosopher %d is thinking...\n", philo->id);
 
-    pthread_mutex_lock(philo->left_fork);
-    printf("Philosopher %d picked up the left fork.\n", philo->id);
 
-    pthread_mutex_lock(philo->right_fork);
-    printf("Philosopher %d picked up the right fork and is eating.\n", philo->id);
 
-    sleep(2);
-
-    pthread_mutex_unlock(philo->right_fork);
-    printf("Philosopher %d put down the right fork.\n", philo->id);
-
-    pthread_mutex_unlock(philo->left_fork);
-    printf("Philosopher %d put down the left fork and is thinking again.\n", philo->id);
+    //This initializes a mutex specifically used for managing
+// access to resources related to the "death" condition of 
+//threads (in the context of the philosopher problem, for instance). The death_mutex is likely used to prevent concurrent
+// modification of shared variables that track whether a philosopher has died.
+//In summary, these mutexes are used to prevent race conditions by locking critical sections where shared resources 
+//(like death status, printed output, and other data) are being modified or accessed by multiple threads.
