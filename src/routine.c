@@ -103,7 +103,18 @@ void	*monitor_routine(void *arg)
 
 int	monitor_routine2(t_philo *philos, int i)
 {
-	if (philos->num_times_eat < 0)
+	if(philos->num_philos==1 && philos->num_times_eat > 0)
+	{
+			if (get_time() - philos[i].last_meal > philos[i].time_to_die)
+		{
+			printf("%ld %d is dead\n", get_time() - philos[i].start_time,
+				philos[i].id);
+			philos[i].data->is_dead = 1;
+			pthread_mutex_unlock(&philos[i].data->death_mutex);
+			return (1);
+		}
+	}
+	if (philos->num_times_eat < 0 )
 	{
 		if (get_time() - philos[i].last_meal > philos[i].time_to_die)
 		{
